@@ -1,8 +1,9 @@
+/* eslint-disable */
 export default {
-  displayName: 'ecommerce-frontend',
+  displayName: 'ecom-frontend',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/ecommerce-frontend',
+  coverageDirectory: '../../coverage/apps/ecom-frontend',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

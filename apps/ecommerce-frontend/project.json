@@ -1,33 +1,33 @@
 {
-  "name": "ecommerce-frontend",
+  "name": "ecom-frontend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "ecommerce-frontend",
-  "sourceRoot": "apps/ecommerce-frontend/src",
+  "prefix": "ecom",
+  "sourceRoot": "apps/ecom-frontend/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ecommerce-frontend",
-        "index": "apps/ecommerce-frontend/src/index.html",
-        "browser": "apps/ecommerce-frontend/src/main.ts",
+        "outputPath": "dist/apps/ecom-frontend",
+        "index": "apps/ecom-frontend/src/index.html",
+        "browser": "apps/ecom-frontend/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/ecommerce-frontend/tsconfig.app.json",
+        "tsConfig": "apps/ecom-frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/ecommerce-frontend/public"
+            "input": "apps/ecom-frontend/public"
           }
         ],
-        "styles": ["apps/ecommerce-frontend/src/styles.scss"],
+        "styles": ["apps/ecom-frontend/src/styles.scss"],
         "scripts": [],
-        "server": "apps/ecommerce-frontend/src/main.server.ts",
+        "server": "apps/ecom-frontend/src/main.server.ts",
         "prerender": true,
         "ssr": {
-          "entry": "apps/ecommerce-frontend/server.ts"
+          "entry": "apps/ecom-frontend/server.ts"
         }
       },
       "configurations": {
@@ -44,12 +44,24 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/ecom-frontend/src/environments/environments.ts",
+              "with": "apps/ecom-frontend/src/environments/environment.production.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/ecom-frontend/src/environments/environments.ts",
+              "with": "apps/ecom-frontend/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -58,10 +70,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "ecommerce-frontend:build:production"
+          "buildTarget": "ecom-frontend:build:production"
         },
         "development": {
-          "buildTarget": "ecommerce-frontend:build:development"
+          "buildTarget": "ecom-frontend:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -69,7 +81,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "ecommerce-frontend:build"
+        "buildTarget": "ecom-frontend:build"
       }
     },
     "lint": {
@@ -79,14 +91,15 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/ecommerce-frontend/jest.config.ts"
+        "jestConfig": "apps/ecom-frontend/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "ecommerce-frontend:build",
-        "staticFilePath": "dist/apps/ecommerce-frontend/browser",
+        "buildTarget": "ecom-frontend:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/ecom-frontend/browser",
         "spa": true
       }
     }
